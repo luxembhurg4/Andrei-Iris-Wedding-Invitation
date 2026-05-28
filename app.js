@@ -207,8 +207,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Form Submission
-  rsvpForm.addEventListener('submit', (e) => {
+  rsvpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const submitBtn = document.getElementById('btn-submit-rsvp');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
 
     const fullName = document.getElementById('guest-fullname').value.trim();
     const email = document.getElementById('guest-email').value.trim();
@@ -233,6 +238,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+
+    // Build payload for SheetMonkey
+    const sheetMonkeyPayload = {
+      "Full Name": fullName,
+      "Email": email,
+      "Attendance": isAttending ? "Yes, I'll be there" : "No, sending love",
+      "Seats Requested": isAttending ? `${guestCount} Seat${guestCount > 1 ? 's' : ''}` : "0 Seats",
+      "Dietary Preferences": dietary,
+      "Warm Wishes": guestMessage,
+      "Companions": companions.join(', ') // Add extra column just in case
+    };
+
+    try {
+      await fetch('https://api.sheetmonkey.io/form/vN9CMZ1pjY35qFZPwhBuci', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sheetMonkeyPayload)
+      });
+    } catch (err) {
+      console.error("SheetMonkey submission error:", err);
+    }
+    
+    // reset button
+    submitBtn.textContent = originalBtnText;
+    submitBtn.disabled = false;
 
     // Save into LocalStorage to mock a database save
     const newRsvp = {
