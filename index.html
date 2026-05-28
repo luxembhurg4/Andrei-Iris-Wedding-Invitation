@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join us in celebrating the wedding of Andrei & Iris. July 18, 2026. Find all the details, entourage, attire guide, and RSVP here.">
+  <title>Andrei & Iris — Wedding Invitation</title>
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="container">
+      <a href="#home" class="logo">A & I</a>
+      <button class="mobile-nav-toggle" id="nav-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#details">Details</a></li>
+        <li><a href="#attire">Attire</a></li>
+        <li><a href="#entourage">Entourage</a></li>
+        <li><a href="#rsvp" class="nav-rsvp-btn">RSVP</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-border"></div>
+    <div class="hero-content">
+      <span class="hero-sub">The Wedding Celebration of</span>
+      <h1 class="hero-title">Andrei & Iris</h1>
+      
+      <div class="elegant-divider">
+        <span>♥</span>
+      </div>
+      
+      <p class="hero-date">July 18, 2026</p>
+      <p class="hero-venue">Elijah Chapel, Taloto District, Tagbilaran City</p>
+    </div>
+  </section>
+
+  <!-- Event Details Section -->
+  <section class="details-section section-padding fade-in-section" id="details">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header-sub">Join Us On Our Big Day</span>
+        <h2 class="section-header-title">Wedding Details</h2>
+      </div>
+      
+      <div class="details-grid">
+        <!-- Ceremony Card -->
+        <div class="details-card">
+          <div class="details-card-icon">
+            <i class="fas fa-church"></i>
+          </div>
+          <h3>The Ceremony</h3>
+          <span class="details-time">2:00 PM — 3:00 PM</span>
+          <p class="details-address">
+            <strong>Elijah Chapel</strong><br>
+            Taloto District, Tagbilaran City, Bohol, Philippines
+          </p>
+          <div class="details-actions">
+            <a href="https://maps.app.goo.gl/Q6BTELBbZWE2kmgt6" target="_blank" class="btn-secondary"><i class="fas fa-map-marker-alt"></i> View on Map</a>
+            <button class="btn-secondary" onclick="addToCalendar('Ceremony', '2026-07-18T14:00:00', 'Elijah Chapel')"><i class="far fa-calendar-plus"></i> Add to Calendar</button>
+          </div>
+        </div>
+        
+        <!-- Reception Card -->
+        <div class="details-card">
+          <div class="details-card-icon">
+            <i class="fas fa-wine-glass"></i>
+          </div>
+          <h3>The Reception</h3>
+          <span class="details-time">3:00 PM Onwards</span>
+          <p class="details-address">
+            <strong>Raven's Buffet Restaurant</strong><br>
+            Dampas Binayran Road, Tagbilaran City, Bohol, Philippines
+          </p>
+          <div class="details-actions">
+            <a href="https://maps.app.goo.gl/zUJAHjNTrAxgiKWw6" target="_blank" class="btn-secondary"><i class="fas fa-map-marker-alt"></i> View on Map</a>
+            <button class="btn-secondary" onclick="addToCalendar('Reception', '2026-07-18T15:00:00', 'Raven\'s Buffet Restaurant')"><i class="far fa-calendar-plus"></i> Add to Calendar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attire Guide Section -->
+  <section class="section-padding container fade-in-section" id="attire">
+    <div class="section-header">
+      <span class="section-header-sub">Dress Code & Inspiration</span>
+      <h2 class="section-header-title">The Wedding Motif</h2>
+    </div>
+    
+    <div class="attire-wrapper">
+      <p class="text-center" style="font-size: 1.3rem; margin-bottom: 2rem;">
+        We would love for you to celebrate with us in style. Our color palette represents elegance, devotion, and warmth.
+      </p>
+      
+      <div class="attire-grid">
+        <div class="attire-color-item">
+          <div class="attire-circle navy-deep"></div>
+          <span class="attire-label">Navy Blue</span>
+        </div>
+        <div class="attire-color-item">
+          <div class="attire-circle gold-solid"></div>
+          <span class="attire-label">Luxurious Gold</span>
+        </div>
+        <div class="attire-color-item">
+          <div class="attire-circle champagne"></div>
+          <span class="attire-label">Champagne</span>
+        </div>
+        <div class="attire-color-item">
+          <div class="attire-circle light-yellow"></div>
+          <span class="attire-label">Light Yellow</span>
+        </div>
+        <div class="attire-color-item">
+          <div class="attire-circle classic-blue"></div>
+          <span class="attire-label">Classic Blue</span>
+        </div>
+      </div>
+      
+      <p class="attire-note">
+        <strong>Attire Guidelines:</strong> Semi-Formal. We kindly request our guests to dress in elegant attire matching our wedding colors (deep navy blues, warm champagne, gold accents, classic blue, or light yellow). <strong style="color: var(--gold-dark); display: block; margin-top: 0.5rem; letter-spacing: 1px;">PLEASE AVOID WEARING ALL WHITE OR ALL BLACK.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Entourage Section -->
+  <section class="section-padding container fade-in-section" id="entourage">
+    <div class="section-header">
+      <span class="section-header-sub">Those Standing With Us</span>
+      <h2 class="section-header-title">The Entourage</h2>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="entourage-tabs">
+      <button class="tab-btn active" data-tab="principal">Principal Sponsors</button>
+      <button class="tab-btn" data-tab="secondary">Secondary Sponsors</button>
+      <button class="tab-btn" data-tab="bearers">Bearers</button>
+      <button class="tab-btn" data-tab="liturgical">Liturgical Sponsors</button>
+      <button class="tab-btn" data-tab="offertory">Offertory Sponsors</button>
+    </div>
+
+    <!-- Principal Sponsors Group -->
+    <div class="entourage-content active" id="principal">
+      <div class="entourage-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem;">
+        <div class="entourage-card">
+          <span class="entourage-role">Principal Sponsors</span>
+          <span class="entourage-name">Mr. Anecito O. Gultia &<br>Mrs. Joy C. Gultia</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role">Principal Sponsors</span>
+          <span class="entourage-name">Mr. Marcelo E. Cenabre &<br>Mrs. Mary Ann A. Cenabre</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role">Principal Sponsors</span>
+          <span class="entourage-name">Mr. Esmeraldo Reyes &<br>Mrs. Susan L. Reyes</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role">Principal Sponsors</span>
+          <span class="entourage-name">Miss Servana E. Estorpe</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Sponsors Group -->
+    <div class="entourage-content" id="secondary">
+      <div class="entourage-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-fire"></i> Candle Sponsors</span>
+          <span class="entourage-name">Mr. Christopher P. Cenabre &<br>Mrs. Jocelyn P. Cenabre</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-scroll"></i> Veil Sponsors</span>
+          <span class="entourage-name">Anna Maria L. Abella &<br>Raizah Mariz Ferniz</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-link"></i> Cord Sponsors</span>
+          <span class="entourage-name">Mr. Arnold Sales &<br>Mrs. Eva C. Sales</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bearers Group -->
+    <div class="entourage-content" id="bearers">
+      <div class="entourage-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;">
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-ring"></i> Ring Bearer</span>
+          <span class="entourage-name">Kalea Andi Eunice Abella</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-book"></i> Bible Bearer</span>
+          <span class="entourage-name">Mark James R. Oclarit</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-coins"></i> Coin Bearer</span>
+          <span class="entourage-name">Jefferson P. Cenabre</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liturgical Sponsors Group -->
+    <div class="entourage-content" id="liturgical">
+      <div class="entourage-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-book-open"></i> First Reading</span>
+          <span class="entourage-name">Ma. Odeza Bornea</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-quote-left"></i> Responsorial Psalm</span>
+          <span class="entourage-name">Meca A. Cenabre</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-hands-praying"></i> Prayers of the Faithful</span>
+          <span class="entourage-name">Maria Lucia P. Cenabre</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offertory Sponsors Group -->
+    <div class="entourage-content" id="offertory">
+      <div class="entourage-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;">
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-seedling"></i> Flowers</span>
+          <span class="entourage-name">Mr. Ruben P. Cenabre &<br>Mrs. Jocelyn G. Cenabre</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-fire"></i> Candles</span>
+          <span class="entourage-name">Mr. Anthony P. Cenabre &<br>Mrs. Geraldine M. Cenabre</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-wine-glass-empty"></i> Host and Wine</span>
+          <span class="entourage-name">Mrs. Severina C. Alegarbes &<br>Mrs. Ana C. Centinales</span>
+        </div>
+        <div class="entourage-card">
+          <span class="entourage-role"><i class="fas fa-apple-whole"></i> Fruits</span>
+          <span class="entourage-name">Miss Keara Shaleen L. Sarpamones &<br>Miss Rosalie G. Saralibo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Photo Gallery Section -->
+  <section class="gallery-section fade-in-section" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header-sub">Captured Moments</span>
+        <h2 class="section-header-title">Our Gallery</h2>
+      </div>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="images/chapel.png" alt="Elijah Chapel Watercolor Sketch">
+          <div class="gallery-caption">
+            <h3>Elijah Chapel</h3>
+            <p>Our Romantic Ceremony Venue</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/rings.png" alt="Editorial Wedding Rings Placeholder">
+          <div class="gallery-caption">
+            <h3>The Rings</h3>
+            <p>A Promise of Eternal Devotion</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP Invitation Card (Before modal trigger) -->
+  <section class="rsvp-section section-padding fade-in-section" id="rsvp">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header-sub">Be Part of Our Day</span>
+        <h2 class="section-header-title">Kindly RSVP</h2>
+      </div>
+      
+      <p class="rsvp-note">
+        Please let us know if you can join our celebration on or before <strong>July 12, 2026</strong>. We look forward to creating beautiful memories with you.
+      </p>
+      
+      <button class="btn-gold" id="open-rsvp-modal">RSVP Online Now</button>
+
+      <!-- RSVP Guidelines Callout Box -->
+      <div class="rsvp-guidelines-box">
+        <div class="rsvp-guidelines-title">
+          <i class="fas fa-circle-info"></i> Important RSVP Guidelines
+        </div>
+        <ul class="rsvp-guidelines-list">
+          <li><strong>Intimate Celebration:</strong> This is a close family celebration only. We kindly encourage our guests to refrain from bringing uninvited companions.</li>
+          <li><strong>Definite Attendance:</strong> Please submit a "Yes" response only once you are absolutely certain of your attendance to assist with our final venue planning.</li>
+          <li><strong>Child Seating:</strong> Children aged 5 years and above will be allocated their own seat (counted as 1 guest). Children aged 4 years and below are free for the venue and do not need a seat count.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Sticky RSVP Trigger -->
+  <div class="floating-rsvp" id="floating-rsvp-trigger">
+    <button class="btn-gold" id="floating-rsvp-btn">RSVP ♥</button>
+  </div>
+
+  <!-- RSVP Modal Popup -->
+  <div class="modal-overlay" id="rsvp-modal">
+    <div class="modal-container">
+      <button class="modal-close" id="close-rsvp-modal" aria-label="Close Modal">&times;</button>
+      
+      <!-- RSVP Form Panel -->
+      <div id="rsvp-form-panel">
+        <div class="modal-header">
+          <h2>Wedding RSVP</h2>
+          <p>Andrei & Iris — July 18, 2026</p>
+        </div>
+        
+        <div class="modal-body">
+          <form action="https://api.sheetmonkey.io/form/vN9CMZ1pjY35qFZPwhBuci" method="POST" id="rsvpForm">
+              
+              <input type="hidden" name="x-sheetmonkey-redirect" value="https://luxembhurg4.github.io/Andrei-Iris-Wedding-Invitation/" />
+
+              <p>
+                  <label for="full_name">YOUR FULL NAME</label><br>
+                  <input type="text" id="full_name" name="Full Name" placeholder="e.g., Benjamin Santos" required>
+              </p>
+
+              <p>
+                  <label for="email">EMAIL ADDRESS</label><br>
+                  <input type="email" id="email" name="Email" placeholder="e.g., benjamin@example.com" required>
+              </p>
+
+              <p>
+                  <label>WILL YOU ATTEND?</label><br>
+                  <input type="hidden" id="attendance_status" name="Attendance" value="Yes, I'll be there" required>
+                  
+                  <button type="button" id="btn_yes" style="background-color: #1a2536; color: white; padding: 15px; margin-right: 10px; border-radius: 5px; border: none;">
+                      <strong>YES, I'LL BE THERE</strong><br><small>Ready to celebrate!</small>
+                  </button>
+                  <button type="button" id="btn_no" style="background-color: #f7f4eb; color: #1a2536; padding: 15px; border-radius: 5px; border: 1px solid #ccc;">
+                      <strong>NO, SENDING LOVE</strong><br><small>Regretfully decline</small>
+                  </button>
+              </p>
+
+              <p>
+                  <label for="seats">TOTAL SEATS REQUESTED (INCLUDING YOU)</label><br>
+                  <select id="seats" name="Seats Requested" required style="width: 100%; padding: 10px;">
+                      <option value="1 Seat">1 Seat</option>
+                      <option value="2 Seats">2 Seats</option>
+                      <option value="3 Seats">3 Seats</option>
+                      <option value="4 Seats">4 Seats</option>
+                  </select>
+              </p>
+
+              <p>
+                  <label for="dietary">DIETARY PREFERENCES / FOOD ALLERGIES</label><br>
+                  <input type="text" id="dietary" name="Dietary Preferences" placeholder="e.g., Vegetarian, Peanut Allergy, None">
+              </p>
+
+              <p>
+                  <label for="wishes">WARM WISHES / NOTES FOR ANDREI & IRIS</label><br>
+                  <textarea id="wishes" name="Warm Wishes" placeholder="Write your message here..." rows="4" style="width: 100%;"></textarea>
+              </p>
+
+              <button type="submit" style="background-color: #1a2536; color: white; width: 100%; padding: 12px; font-weight: bold; border: none; cursor: pointer;">SUBMIT RSVP</button>
+          </form>
+
+          <script>
+              const btnYes = document.getElementById('btn_yes');
+              const btnNo = document.getElementById('btn_no');
+              const attendanceInput = document.getElementById('attendance_status');
+
+              btnYes.addEventListener('click', () => {
+                  attendanceInput.value = "Yes, I'll be there";
+                  btnYes.style.backgroundColor = "#1a2536"; btnYes.style.color = "white";
+                  btnNo.style.backgroundColor = "#f7f4eb"; btnNo.style.color = "#1a2536";
+              });
+
+              btnNo.addEventListener('click', () => {
+                  attendanceInput.value = "No, sending love";
+                  btnNo.style.backgroundColor = "#1a2536"; btnNo.style.color = "white";
+                  btnYes.style.backgroundColor = "#f7f4eb"; btnYes.style.color = "#1a2536";
+              });
+          </script>
+        </div>
+      </div>
+      
+      <!-- RSVP Success Card -->
+      <div class="rsvp-success-card" id="rsvp-success-panel">
+        <div class="success-icon">
+          <i class="fas fa-heart-circle-check"></i>
+        </div>
+        <h3>RSVP Submitted!</h3>
+        <p>Thank you so much! We have recorded your response. A copy of your confirmation is summarized below.</p>
+        
+        <div class="rsvp-summary-details">
+          <div class="rsvp-summary-row">
+            <span class="rsvp-summary-label">Primary Guest</span>
+            <span class="rsvp-summary-value" id="summary-name">Benjamin Santos</span>
+          </div>
+          <div class="rsvp-summary-row">
+            <span class="rsvp-summary-label">Status</span>
+            <span class="rsvp-summary-value" id="summary-status" style="color: var(--gold-dark);">Joyfully Attending</span>
+          </div>
+          <div class="rsvp-summary-row" id="summary-guest-count-row">
+            <span class="rsvp-summary-label">Total Seat(s)</span>
+            <span class="rsvp-summary-value" id="summary-guest-count">1 Seat Reserved</span>
+          </div>
+          <div class="rsvp-summary-row" id="summary-companions-row" style="display:none;">
+            <span class="rsvp-summary-label">Companions</span>
+            <span class="rsvp-summary-value" id="summary-companions">-</span>
+          </div>
+          <div class="rsvp-summary-row" id="summary-dietary-row">
+            <span class="rsvp-summary-label">Dietary Notes</span>
+            <span class="rsvp-summary-value" id="summary-dietary">None</span>
+          </div>
+        </div>
+        
+        <button class="btn-gold" id="btn-close-success">Close & Return</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container">
+      <span class="footer-names">Andrei & Iris</span>
+      <p class="footer-quote">"To have and to hold from this day forward..."</p>
+      <div class="elegant-divider" style="margin: 2rem 0 1.5rem;">
+        <span style="color: var(--gold-solid);">♥</span>
+      </div>
+      <p class="footer-copyright">&copy; 2026 Andrei & Iris. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Custom JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
