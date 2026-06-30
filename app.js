@@ -332,6 +332,156 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.modal-container').scrollTop = 0;
   });
 
+  // =========================================================================
+  // Gallery Slideshow Slider
+  // =========================================================================
+  const slides = document.querySelectorAll('.gallery-slide');
+  const prevBtn = document.getElementById('prev-slide');
+  const nextBtn = document.getElementById('next-slide');
+  const dotsContainer = document.getElementById('slider-dots');
+  let currentSlideIndex = 0;
+  let slideInterval;
+
+  if (slides.length > 0) {
+    // Generate Dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.className = `dot ${index === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    const adjustContainerHeight = (img) => {
+      const slider = document.getElementById('gallery-slider');
+      if (!slider || !img) return;
+      const containerWidth = slider.clientWidth;
+      const naturalWidth = img.naturalWidth;
+      const naturalHeight = img.naturalHeight;
+      if (naturalWidth > 0) {
+        const calculatedHeight = (naturalHeight / naturalWidth) * containerWidth;
+        // Cap the height to 500px or 60vh to prevent it from occupying the whole screen
+        const maxHeight = Math.min(500, window.innerHeight * 0.6);
+        const finalHeight = Math.min(calculatedHeight, maxHeight);
+        slider.style.height = `${finalHeight}px`;
+      }
+    };
+
+    const updateSlides = () => {
+      slides.forEach((slide, index) => {
+        if (index === currentSlideIndex) {
+          slide.classList.add('active');
+          dots[index].classList.add('active');
+          
+          // Adjust height dynamically based on image ratio
+          const img = slide.querySelector('img.slide-fg');
+          if (img) {
+            if (img.complete) {
+              adjustContainerHeight(img);
+            } else {
+              img.addEventListener('load', () => adjustContainerHeight(img));
+            }
+          }
+        } else {
+          slide.classList.remove('active');
+          dots[index].classList.remove('active');
+        }
+      });
+    };
+
+    const nextSlide = () => {
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      updateSlides();
+    };
+
+    const prevSlide = () => {
+      currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+      updateSlides();
+    };
+
+    const goToSlide = (index) => {
+      currentSlideIndex = index;
+      updateSlides();
+      resetTimer();
+    };
+
+    const startTimer = () => {
+      slideInterval = setInterval(nextSlide, 5000);
+    };
+
+    const resetTimer = () => {
+      clearInterval(slideInterval);
+      startTimer();
+    };
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetTimer();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetTimer();
+      });
+    }
+
+    // Recalculate slider height on window resize
+    window.addEventListener('resize', () => {
+      const activeSlide = document.querySelector('.gallery-slide.active');
+      if (activeSlide) {
+        const img = activeSlide.querySelector('img.slide-fg');
+        if (img) adjustContainerHeight(img);
+      }
+    });
+
+    // Run first height adjustment on page load / first slide load
+    const firstImg = slides[0].querySelector('img.slide-fg');
+    if (firstImg) {
+      if (firstImg.complete) {
+        adjustContainerHeight(firstImg);
+      } else {
+        firstImg.addEventListener('load', () => adjustContainerHeight(firstImg));
+      }
+    }
+
+    // Touch swipe gestures on mobile/phone screens
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const sliderContainer = document.getElementById('gallery-slider');
+    if (sliderContainer) {
+      sliderContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      sliderContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+    }
+
+    const handleSwipe = () => {
+      const swipeThreshold = 50; // minimum swipe distance in px
+      if (touchEndX < touchStartX - swipeThreshold) {
+        // Swiped Left -> Next Slide
+        nextSlide();
+        resetTimer();
+      } else if (touchEndX > touchStartX + swipeThreshold) {
+        // Swiped Right -> Prev Slide
+        prevSlide();
+        resetTimer();
+      }
+    };
+
+    startTimer();
+  }
+
 });
 
 // =========================================================================

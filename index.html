@@ -169,6 +169,10 @@
           <span class="entourage-role">Principal Sponsors</span>
           <span class="entourage-name">Ms. Servana E. Cenabre &<br>Ms. Melina E. Cenabre</span>
         </div>
+        <div class="entourage-card">
+          <span class="entourage-role">Principal Sponsors</span>
+          <span class="entourage-name">Mr. Nerio Llorente &<br>Mrs. Carlita Llorente</span>
+        </div>
       </div>
     </div>
 
@@ -257,21 +261,41 @@
         <h2 class="section-header-title">Our Gallery</h2>
       </div>
       
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="images/chapel.png" alt="Elijah Chapel Watercolor Sketch">
-          <div class="gallery-caption">
-            <h3>Elijah Chapel</h3>
-            <p>Our Romantic Ceremony Venue</p>
+      <!-- Gallery Slideshow -->
+      <div class="gallery-slider-wrapper">
+        <div class="gallery-slider" id="gallery-slider">
+          <div class="gallery-slide active">
+            <img src="Photos/DSC07220 (1).jpg" alt="Captured Moment 1" class="slide-bg">
+            <img src="Photos/DSC07220 (1).jpg" alt="Captured Moment 1" class="slide-fg">
+          </div>
+          <div class="gallery-slide">
+            <img src="Photos/DSC07253.jpg" alt="Captured Moment 2" class="slide-bg">
+            <img src="Photos/DSC07253.jpg" alt="Captured Moment 2" class="slide-fg">
+          </div>
+          <div class="gallery-slide">
+            <img src="Photos/DSC07260.jpg" alt="Captured Moment 3" class="slide-bg">
+            <img src="Photos/DSC07260.jpg" alt="Captured Moment 3" class="slide-fg">
+          </div>
+          <div class="gallery-slide">
+            <img src="Photos/DSC07262.jpg" alt="Captured Moment 4" class="slide-bg">
+            <img src="Photos/DSC07262.jpg" alt="Captured Moment 4" class="slide-fg">
+          </div>
+          <div class="gallery-slide">
+            <img src="Photos/Gemini_Generated_Image_od85djod85djod85.png" alt="Captured Moment 5" class="slide-bg">
+            <img src="Photos/Gemini_Generated_Image_od85djod85djod85.png" alt="Captured Moment 5" class="slide-fg">
+          </div>
+          <div class="gallery-slide">
+            <img src="Photos/Gemini_Generated_Image_w81z0ww81z0ww81z.png" alt="Captured Moment 6" class="slide-bg">
+            <img src="Photos/Gemini_Generated_Image_w81z0ww81z0ww81z.png" alt="Captured Moment 6" class="slide-fg">
           </div>
         </div>
-        <div class="gallery-item">
-          <img src="images/rings.png" alt="Editorial Wedding Rings Placeholder">
-          <div class="gallery-caption">
-            <h3>The Rings</h3>
-            <p>A Promise of Eternal Devotion</p>
-          </div>
-        </div>
+        
+        <!-- Navigation Buttons -->
+        <button class="slider-btn prev-btn" id="prev-slide" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next-btn" id="next-slide" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+        
+        <!-- Slider Dots -->
+        <div class="slider-dots" id="slider-dots"></div>
       </div>
     </div>
   </section>
