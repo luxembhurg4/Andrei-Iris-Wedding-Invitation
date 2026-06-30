@@ -355,18 +355,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const dots = document.querySelectorAll('.dot');
 
-    const adjustContainerHeight = (img) => {
+    const adjustContainerWidth = (img) => {
       const slider = document.getElementById('gallery-slider');
-      if (!slider || !img) return;
-      const containerWidth = slider.clientWidth;
+      const wrapper = document.querySelector('.gallery-slider-wrapper');
+      if (!slider || !wrapper || !img) return;
+      
+      const containerHeight = slider.clientHeight; // Reads fixed height from CSS (480px on desktop, 350px on mobile)
       const naturalWidth = img.naturalWidth;
       const naturalHeight = img.naturalHeight;
-      if (naturalWidth > 0) {
-        const calculatedHeight = (naturalHeight / naturalWidth) * containerWidth;
-        // Cap the height to 500px or 60vh to prevent it from occupying the whole screen
-        const maxHeight = Math.min(500, window.innerHeight * 0.6);
-        const finalHeight = Math.min(calculatedHeight, maxHeight);
-        slider.style.height = `${finalHeight}px`;
+      if (naturalHeight > 0) {
+        const calculatedWidth = (naturalWidth / naturalHeight) * containerHeight;
+        
+        // Cap the width to prevent it from overflowing the viewport width (90vw) or getting ridiculously wide
+        const maxViewportWidth = window.innerWidth * 0.9;
+        const finalWidth = Math.min(calculatedWidth, maxViewportWidth, 800); // cap max width at 800px
+        
+        wrapper.style.width = `${finalWidth}px`;
       }
     };
 
@@ -376,13 +380,13 @@ document.addEventListener('DOMContentLoaded', () => {
           slide.classList.add('active');
           dots[index].classList.add('active');
           
-          // Adjust height dynamically based on image ratio
+          // Adjust width dynamically based on image ratio
           const img = slide.querySelector('img.slide-fg');
           if (img) {
             if (img.complete) {
-              adjustContainerHeight(img);
+              adjustContainerWidth(img);
             } else {
-              img.addEventListener('load', () => adjustContainerHeight(img));
+              img.addEventListener('load', () => adjustContainerWidth(img));
             }
           }
         } else {
@@ -431,22 +435,22 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Recalculate slider height on window resize
+    // Recalculate slider width on window resize
     window.addEventListener('resize', () => {
       const activeSlide = document.querySelector('.gallery-slide.active');
       if (activeSlide) {
         const img = activeSlide.querySelector('img.slide-fg');
-        if (img) adjustContainerHeight(img);
+        if (img) adjustContainerWidth(img);
       }
     });
 
-    // Run first height adjustment on page load / first slide load
+    // Run first width adjustment on page load / first slide load
     const firstImg = slides[0].querySelector('img.slide-fg');
     if (firstImg) {
       if (firstImg.complete) {
-        adjustContainerHeight(firstImg);
+        adjustContainerWidth(firstImg);
       } else {
-        firstImg.addEventListener('load', () => adjustContainerHeight(firstImg));
+        firstImg.addEventListener('load', () => adjustContainerWidth(firstImg));
       }
     }
 
