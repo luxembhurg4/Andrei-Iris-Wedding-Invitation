@@ -1441,11 +1441,6 @@ footer {
 }
 
 /* Editorial Photo Gallery Section */
-.gallery-section {
-  background: var(--cream);
-  padding: 8rem 0;
-}
-
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1623,132 +1618,111 @@ footer {
   }
 }
 
-/* Gallery Slider Styling */
-.gallery-slider-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 90%;
-  margin: 0 auto;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: var(--shadow-navy);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  transition: width 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+/* Gallery Film Strip — continuous side-by-side scroll */
+.gallery-section {
+  background: var(--cream);
+  padding: 8rem 0 6rem;
 }
 
-.gallery-slider {
-  position: relative;
+.film-strip-outer {
   width: 100%;
-  height: 480px;
+  margin-top: 1rem;
 }
 
-.gallery-slide {
+.film-strip-viewport {
+  background: #0a0a0a;
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow:
+    0 12px 40px rgba(7, 16, 30, 0.18),
+    0 0 30px rgba(212, 175, 55, 0.08);
+  pointer-events: none;
+  user-select: none;
+}
+
+.film-strip-sprockets {
+  height: 26px;
+  background: #0a0a0a;
+  position: relative;
+}
+
+.film-strip-sprockets::before {
+  content: '';
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
-  z-index: 1;
+  right: 0;
+  height: 11px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--cream) 0px,
+    var(--cream) 9px,
+    transparent 9px,
+    transparent 22px
+  );
+}
+
+.film-strip-window {
   overflow: hidden;
+  width: 100%;
 }
 
-.gallery-slide.active {
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
+.film-strip-track {
+  display: flex;
+  width: max-content;
+  animation: filmRollRight var(--roll-duration, 50s) linear infinite;
+  will-change: transform;
 }
 
-.gallery-slide img.slide-bg {
+.film-strip-set {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.film-frame {
+  flex-shrink: 0;
+  width: clamp(140px, 22vw, 220px);
+  aspect-ratio: 2 / 3;
+  padding: 0 3px;
+  background: #0a0a0a;
+  border-right: 4px solid #050505;
+  box-shadow: inset -2px 0 0 rgba(255, 255, 255, 0.04);
+}
+
+.film-frame:last-child {
+  border-right: none;
+}
+
+.film-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(20px) brightness(0.45);
-  transform: scale(1.15);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.gallery-slide img.slide-fg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  position: relative;
-  z-index: 2;
   display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
-/* Slider Controls */
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(12, 27, 51, 0.5);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  color: var(--cream);
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: var(--transition-smooth);
-}
-
-.slider-btn:hover {
-  background: var(--navy-deep);
-  border-color: var(--gold-solid);
-  color: var(--gold-solid);
-}
-
-.prev-btn {
-  left: 1.5rem;
-}
-
-.next-btn {
-  right: 1.5rem;
-}
-
-.slider-dots {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.8rem;
-  z-index: 10;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(12, 27, 51, 0.3);
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.dot.active {
-  background: var(--gold-solid);
-  transform: scale(1.2);
+@keyframes filmRollRight {
+  from { transform: translateX(calc(-1 * var(--loop-width, 50%))); }
+  to { transform: translateX(0); }
 }
 
 @media (max-width: 768px) {
-  .gallery-slider {
-    height: 350px;
+  .gallery-section {
+    padding: 5rem 0 4rem;
   }
-  .slider-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 0.8rem;
+
+  .film-frame {
+    width: clamp(120px, 38vw, 180px);
   }
-  .prev-btn { left: 0.8rem; }
-  .next-btn { right: 0.8rem; }
+
+  .film-strip-sprockets {
+    height: 20px;
+  }
+
+  .film-strip-sprockets::before {
+    height: 9px;
+  }
 }

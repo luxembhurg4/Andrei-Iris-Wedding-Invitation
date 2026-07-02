@@ -333,157 +333,48 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // Gallery Slideshow Slider
+  // Film Strip Gallery — always full, never pauses
   // =========================================================================
-  const slides = document.querySelectorAll('.gallery-slide');
-  const prevBtn = document.getElementById('prev-slide');
-  const nextBtn = document.getElementById('next-slide');
-  const dotsContainer = document.getElementById('slider-dots');
-  let currentSlideIndex = 0;
-  let slideInterval;
+  const filmStripTrack = document.getElementById('film-strip-track');
+  const filmStripWindow = document.querySelector('.film-strip-window');
 
-  if (slides.length > 0) {
-    // Generate Dots
-    slides.forEach((_, index) => {
-      const dot = document.createElement('div');
-      dot.className = `dot ${index === 0 ? 'active' : ''}`;
-      dot.addEventListener('click', () => {
-        goToSlide(index);
-      });
-      dotsContainer.appendChild(dot);
-    });
+  const buildFilmStrip = () => {
+    if (!filmStripTrack || !filmStripWindow) return;
 
-    const dots = document.querySelectorAll('.dot');
+    const templateSet = filmStripTrack.querySelector('.film-strip-set');
+    if (!templateSet) return;
 
-    const adjustContainerWidth = (img) => {
-      const slider = document.getElementById('gallery-slider');
-      const wrapper = document.querySelector('.gallery-slider-wrapper');
-      if (!slider || !wrapper || !img) return;
-      
-      const containerHeight = slider.clientHeight; // Reads fixed height from CSS (480px on desktop, 350px on mobile)
-      const naturalWidth = img.naturalWidth;
-      const naturalHeight = img.naturalHeight;
-      if (naturalHeight > 0) {
-        const calculatedWidth = (naturalWidth / naturalHeight) * containerHeight;
-        
-        // Cap the width to prevent it from overflowing the viewport width (90vw) or getting ridiculously wide
-        const maxViewportWidth = window.innerWidth * 0.9;
-        const finalWidth = Math.min(calculatedWidth, maxViewportWidth, 800); // cap max width at 800px
-        
-        wrapper.style.width = `${finalWidth}px`;
-      }
-    };
+    const originalHTML = templateSet.innerHTML;
+    filmStripTrack.innerHTML = '';
 
-    const updateSlides = () => {
-      slides.forEach((slide, index) => {
-        if (index === currentSlideIndex) {
-          slide.classList.add('active');
-          dots[index].classList.add('active');
-          
-          // Adjust width dynamically based on image ratio
-          const img = slide.querySelector('img.slide-fg');
-          if (img) {
-            if (img.complete) {
-              adjustContainerWidth(img);
-            } else {
-              img.addEventListener('load', () => adjustContainerWidth(img));
-            }
-          }
-        } else {
-          slide.classList.remove('active');
-          dots[index].classList.remove('active');
-        }
-      });
-    };
+    const set = document.createElement('div');
+    set.className = 'film-strip-set';
+    set.innerHTML = originalHTML;
+    filmStripTrack.appendChild(set);
 
-    const nextSlide = () => {
-      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-      updateSlides();
-    };
+    const vpWidth = filmStripWindow.offsetWidth;
+    const seedFrames = [...set.querySelectorAll('.film-frame')];
 
-    const prevSlide = () => {
-      currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-      updateSlides();
-    };
-
-    const goToSlide = (index) => {
-      currentSlideIndex = index;
-      updateSlides();
-      resetTimer();
-    };
-
-    const startTimer = () => {
-      slideInterval = setInterval(nextSlide, 5000);
-    };
-
-    const resetTimer = () => {
-      clearInterval(slideInterval);
-      startTimer();
-    };
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetTimer();
-      });
+    while (set.offsetWidth < vpWidth) {
+      seedFrames.forEach((frame) => set.appendChild(frame.cloneNode(true)));
     }
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetTimer();
-      });
-    }
+    const loopWidth = set.offsetWidth;
+    filmStripTrack.appendChild(set.cloneNode(true));
+    filmStripTrack.appendChild(set.cloneNode(true));
 
-    // Recalculate slider width on window resize
+    filmStripTrack.style.setProperty('--loop-width', `${loopWidth}px`);
+    filmStripTrack.style.setProperty('--roll-duration', `${Math.max(25, loopWidth / 35)}s`);
+  };
+
+  if (filmStripTrack && filmStripWindow) {
+    buildFilmStrip();
+
+    let resizeTimer;
     window.addEventListener('resize', () => {
-      const activeSlide = document.querySelector('.gallery-slide.active');
-      if (activeSlide) {
-        const img = activeSlide.querySelector('img.slide-fg');
-        if (img) adjustContainerWidth(img);
-      }
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildFilmStrip, 200);
     });
-
-    // Run first width adjustment on page load / first slide load
-    const firstImg = slides[0].querySelector('img.slide-fg');
-    if (firstImg) {
-      if (firstImg.complete) {
-        adjustContainerWidth(firstImg);
-      } else {
-        firstImg.addEventListener('load', () => adjustContainerWidth(firstImg));
-      }
-    }
-
-    // Touch swipe gestures on mobile/phone screens
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    const sliderContainer = document.getElementById('gallery-slider');
-    if (sliderContainer) {
-      sliderContainer.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-
-      sliderContainer.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, { passive: true });
-    }
-
-    const handleSwipe = () => {
-      const swipeThreshold = 50; // minimum swipe distance in px
-      if (touchEndX < touchStartX - swipeThreshold) {
-        // Swiped Left -> Next Slide
-        nextSlide();
-        resetTimer();
-      } else if (touchEndX > touchStartX + swipeThreshold) {
-        // Swiped Right -> Prev Slide
-        prevSlide();
-        resetTimer();
-      }
-    };
-
-    startTimer();
   }
 
 });

@@ -260,42 +260,27 @@
         <span class="section-header-sub">Captured Moments</span>
         <h2 class="section-header-title">Our Gallery</h2>
       </div>
-      
-      <!-- Gallery Slideshow -->
-      <div class="gallery-slider-wrapper">
-        <div class="gallery-slider" id="gallery-slider">
-          <div class="gallery-slide active">
-            <img src="Photos/DSC07220 (1).jpg" alt="Captured Moment 1" class="slide-bg">
-            <img src="Photos/DSC07220 (1).jpg" alt="Captured Moment 1" class="slide-fg">
-          </div>
-          <div class="gallery-slide">
-            <img src="Photos/DSC07253.jpg" alt="Captured Moment 2" class="slide-bg">
-            <img src="Photos/DSC07253.jpg" alt="Captured Moment 2" class="slide-fg">
-          </div>
-          <div class="gallery-slide">
-            <img src="Photos/DSC07260.jpg" alt="Captured Moment 3" class="slide-bg">
-            <img src="Photos/DSC07260.jpg" alt="Captured Moment 3" class="slide-fg">
-          </div>
-          <div class="gallery-slide">
-            <img src="Photos/DSC07262.jpg" alt="Captured Moment 4" class="slide-bg">
-            <img src="Photos/DSC07262.jpg" alt="Captured Moment 4" class="slide-fg">
-          </div>
-          <div class="gallery-slide">
-            <img src="Photos/Gemini_Generated_Image_od85djod85djod85.png" alt="Captured Moment 5" class="slide-bg">
-            <img src="Photos/Gemini_Generated_Image_od85djod85djod85.png" alt="Captured Moment 5" class="slide-fg">
-          </div>
-          <div class="gallery-slide">
-            <img src="Photos/Gemini_Generated_Image_w81z0ww81z0ww81z.png" alt="Captured Moment 6" class="slide-bg">
-            <img src="Photos/Gemini_Generated_Image_w81z0ww81z0ww81z.png" alt="Captured Moment 6" class="slide-fg">
+    </div>
+
+    <!-- Continuous Film Strip — side-by-side photos rolling left to right -->
+    <div class="film-strip-outer" id="film-strip">
+      <div class="film-strip-viewport">
+        <div class="film-strip-sprockets sprockets-top"></div>
+
+        <div class="film-strip-window">
+          <div class="film-strip-track" id="film-strip-track">
+            <div class="film-strip-set">
+              <div class="film-frame"><img src="Photos/DSC07220 (1).jpg" alt="Andrei & Iris — moment 1" loading="eager"></div>
+              <div class="film-frame"><img src="Photos/DSC07253.jpg" alt="Andrei & Iris — moment 2" loading="eager"></div>
+              <div class="film-frame"><img src="Photos/DSC07260.jpg" alt="Andrei & Iris — moment 3" loading="eager"></div>
+              <div class="film-frame"><img src="Photos/DSC07262.jpg" alt="Andrei & Iris — moment 4" loading="eager"></div>
+              <div class="film-frame"><img src="Photos/Gemini_Generated_Image_od85djod85djod85.png" alt="Andrei & Iris — moment 5" loading="eager"></div>
+              <div class="film-frame"><img src="Photos/Gemini_Generated_Image_w81z0ww81z0ww81z.png" alt="Andrei & Iris — moment 6" loading="eager"></div>
+            </div>
           </div>
         </div>
-        
-        <!-- Navigation Buttons -->
-        <button class="slider-btn prev-btn" id="prev-slide" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
-        <button class="slider-btn next-btn" id="next-slide" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
-        
-        <!-- Slider Dots -->
-        <div class="slider-dots" id="slider-dots"></div>
+
+        <div class="film-strip-sprockets sprockets-bottom"></div>
       </div>
     </div>
   </section>
