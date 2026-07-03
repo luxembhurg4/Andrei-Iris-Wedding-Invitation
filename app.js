@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const rsvpSuccessPanel = document.getElementById('rsvp-success-panel');
   const rsvpForm = document.getElementById('rsvp-wedding-form');
   const btnCloseSuccess = document.getElementById('btn-close-success');
+  const honeypotField = document.getElementById('website');
 
   const rsvpYesFields = document.getElementById('rsvp-yes-fields');
   const guestCountSelect = document.getElementById('guest-count');
@@ -111,11 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const radioYes = document.getElementById('radio-yes');
   const radioNo = document.getElementById('radio-no');
   const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
+  const formOpenedAt = { time: 0 };
 
   // Open Modal function
   const openModal = () => {
     rsvpModal.classList.add('open');
     document.body.style.overflow = 'hidden'; // Disable scroll on background
+    formOpenedAt.time = Date.now();
   };
 
   // Close Modal function
@@ -214,6 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const originalBtnText = submitBtn.textContent;
     submitBtn.textContent = "Sending...";
     submitBtn.disabled = true;
+
+    const timeSpentMs = Date.now() - formOpenedAt.time;
+    const isBotLike = honeypotField && honeypotField.value.trim() !== '';
+    const submittedTooFast = timeSpentMs > 0 && timeSpentMs < 3000;
+
+    if (isBotLike || submittedTooFast) {
+      console.warn('Blocked likely spam RSVP submission.');
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
+      return;
+    }
 
     const fullName = document.getElementById('guest-fullname').value.trim();
     const email = document.getElementById('guest-email').value.trim();

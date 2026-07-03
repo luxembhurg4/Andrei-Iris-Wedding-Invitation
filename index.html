@@ -356,6 +356,12 @@
         
         <div class="modal-body">
           <form id="rsvp-wedding-form">
+            <!-- Honeypot field: hidden from guests, tempting to bots -->
+            <div class="sr-only" aria-hidden="true">
+              <label for="website">Website</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
             <!-- Full Name -->
             <div class="form-group">
               <label for="guest-fullname">Your Full Name</label>
