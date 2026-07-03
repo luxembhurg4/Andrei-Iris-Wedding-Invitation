@@ -1671,7 +1671,7 @@ footer {
 .film-strip-track {
   display: flex;
   width: max-content;
-  animation: filmRollRight var(--roll-duration, 50s) linear infinite;
+  /* Animation is set dynamically by JS after images load */
   will-change: transform;
 }
 
@@ -1707,6 +1707,12 @@ footer {
 @keyframes filmRollRight {
   from { transform: translateX(calc(-1 * var(--loop-width, 50%))); }
   to { transform: translateX(0); }
+}
+
+/* Natural left-scroll direction for camera roll effect */
+@keyframes filmRollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-1 * var(--loop-width, 50%))); }
 }
 
 @media (max-width: 768px) {

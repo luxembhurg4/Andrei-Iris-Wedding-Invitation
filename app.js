@@ -410,3 +410,63 @@ function addToCalendar(type, isoDateTimeString, location) {
   
   window.open(googleCalendarUrl, '_blank');
 }
+
+// =========================================================================
+// Film Strip — Infinite Seamless Loop
+// =========================================================================
+(function initFilmStrip() {
+  const track = document.getElementById('film-strip-track');
+  if (!track) return;
+
+  const originalSet = track.querySelector('.film-strip-set');
+  if (!originalSet) return;
+
+  // Duplicate the set so we always have a seamless loop
+  // We need at least enough copies to fill the viewport twice
+  const clone = originalSet.cloneNode(true);
+  track.appendChild(clone);
+
+  // After images load, measure the width of one set and set CSS vars
+  function applyMetrics() {
+    const setWidth = originalSet.scrollWidth;
+    const totalWidth = track.scrollWidth;
+
+    // --loop-width: the pixel distance to translateX for one full set
+    // We want to slide left by exactly one set-width and then snap back
+    track.style.setProperty('--loop-width', `${setWidth}px`);
+
+    // Speed: ~80px per second feels natural (adjust as needed)
+    const pxPerSec = 80;
+    const duration = Math.round(setWidth / pxPerSec);
+    track.style.setProperty('--roll-duration', `${duration}s`);
+
+    // Set the animation using the now-known pixel value directly
+    track.style.animation = `filmRollLeft ${duration}s linear infinite`;
+  }
+
+  // Wait for images to finish loading before measuring
+  const imgs = track.querySelectorAll('img');
+  let loaded = 0;
+  const total = imgs.length;
+
+  if (total === 0) {
+    applyMetrics();
+    return;
+  }
+
+  imgs.forEach(img => {
+    if (img.complete) {
+      loaded++;
+      if (loaded === total) applyMetrics();
+    } else {
+      img.addEventListener('load', () => {
+        loaded++;
+        if (loaded === total) applyMetrics();
+      });
+      img.addEventListener('error', () => {
+        loaded++;
+        if (loaded === total) applyMetrics();
+      });
+    }
+  });
+})();
