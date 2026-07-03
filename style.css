@@ -1671,7 +1671,7 @@ footer {
 .film-strip-track {
   display: flex;
   width: max-content;
-  /* Animation is set dynamically by JS after images load */
+  animation: filmRollLeft var(--roll-duration, 50s) linear infinite;
   will-change: transform;
 }
 
@@ -1702,6 +1702,8 @@ footer {
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
+  /* Subtle vintage film look — softens sharpness */
+  filter: contrast(0.92) brightness(0.97) saturate(0.88);
 }
 
 @keyframes filmRollRight {
@@ -1720,8 +1722,9 @@ footer {
     padding: 5rem 0 4rem;
   }
 
+  /* Narrower frames on mobile — shows ~3-4 photos at once */
   .film-frame {
-    width: clamp(120px, 38vw, 180px);
+    width: clamp(90px, 28vw, 130px);
   }
 
   .film-strip-sprockets {
