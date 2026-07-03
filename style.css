@@ -1666,6 +1666,7 @@ footer {
 .film-strip-window {
   overflow: hidden;
   width: 100%;
+  contain: layout style; /* isolate layout so scrolling doesn't cause full-page reflow */
 }
 
 .film-strip-track {
@@ -1673,6 +1674,7 @@ footer {
   width: max-content;
   animation: filmRollLeft var(--roll-duration, 50s) linear infinite;
   will-change: transform;
+  transform: translateZ(0); /* force own GPU compositing layer */
 }
 
 .film-strip-set {
@@ -1702,8 +1704,7 @@ footer {
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
-  /* Subtle vintage film look — softens sharpness */
-  filter: contrast(0.92) brightness(0.97) saturate(0.88);
+  /* No CSS filter here — filters on animated children kill mobile GPU performance */
 }
 
 @keyframes filmRollRight {

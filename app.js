@@ -344,27 +344,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const templateSet = filmStripTrack.querySelector('.film-strip-set');
     if (!templateSet) return;
 
+    // Store original HTML once, rebuild cleanly
     const originalHTML = templateSet.innerHTML;
     filmStripTrack.innerHTML = '';
 
+    // Build one full set
     const set = document.createElement('div');
     set.className = 'film-strip-set';
     set.innerHTML = originalHTML;
     filmStripTrack.appendChild(set);
 
-    const vpWidth = filmStripWindow.offsetWidth;
-    const seedFrames = [...set.querySelectorAll('.film-frame')];
-
-    while (set.offsetWidth < vpWidth) {
-      seedFrames.forEach((frame) => set.appendChild(frame.cloneNode(true)));
-    }
+    // Just one clone — two sets total is enough for a seamless loop
+    filmStripTrack.appendChild(set.cloneNode(true));
 
     const loopWidth = set.offsetWidth;
-    filmStripTrack.appendChild(set.cloneNode(true));
-    filmStripTrack.appendChild(set.cloneNode(true));
 
     filmStripTrack.style.setProperty('--loop-width', `${loopWidth}px`);
-    filmStripTrack.style.setProperty('--roll-duration', `${Math.max(25, loopWidth / 35)}s`);
+
+    // Slower = smoother on mobile (50px/sec desktop, 40px/sec mobile)
+    const pxPerSec = window.innerWidth < 768 ? 40 : 50;
+    const duration = Math.max(20, Math.round(loopWidth / pxPerSec));
+    filmStripTrack.style.setProperty('--roll-duration', `${duration}s`);
   };
 
   if (filmStripTrack && filmStripWindow) {
