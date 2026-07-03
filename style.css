@@ -1684,8 +1684,8 @@ footer {
 
 .film-frame {
   flex-shrink: 0;
-  width: clamp(140px, 22vw, 220px);
-  aspect-ratio: 2 / 3;
+  width: clamp(180px, 28vw, 280px);
+  aspect-ratio: 3 / 4;
   padding: 0 3px;
   background: #0a0a0a;
   border-right: 4px solid #050505;
@@ -1723,9 +1723,10 @@ footer {
     padding: 5rem 0 4rem;
   }
 
-  /* Narrower frames on mobile — shows ~3-4 photos at once */
+  /* Bigger frames on mobile — 2 photos visible at a time, impactful size */
   .film-frame {
-    width: clamp(90px, 28vw, 130px);
+    width: clamp(140px, 45vw, 200px);
+    aspect-ratio: 3 / 4;
   }
 
   .film-strip-sprockets {
